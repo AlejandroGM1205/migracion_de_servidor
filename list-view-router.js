@@ -1,17 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const tasks = require('./src/tasks');
 
-router.get('/tasksCompleted', (req, res) => {
-    const completedTasks = tasks.filter(task => task.isCompleted);
-    res.json(completedTasks)
-    }
-);
+const verifyParams = require('./middlewares/verifyParams');
+const getCompletedTasks = require('./controllers/getCompleteTasks');
 
-router.get('/tasksInCompleted', (req,res) => {
-    const inCompletedTasks = tasks.filter(task => !task.isCompleted)
+router.get('/tasksCompleted/:param1/:param2', verifyParams, getCompletedTasks);
 
-    res.json(inCompletedTasks)
-});
+router.get('/tasksInCompleted/:param1/:param2',verifyParams, );
 
 module.exports = router;
