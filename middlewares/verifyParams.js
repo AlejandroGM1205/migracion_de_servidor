@@ -1,7 +1,7 @@
 const verifyParams = (req, res, next) => {
-    const {param1, param2} =req.params;
+    const {Completed} =req.params;
 
-    if (!param1 || !param2) {
+    if (!Completed) {
         return res.status(400).json({error: 'Parametros incorrectos.'});
     }
     next();

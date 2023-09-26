@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 const verifyParams = require('./middlewares/verifyParams');
-const getCompletedTasks = require('./controllers/getCompleteTasks');
+// const getCompletedTasks = require('./controllers/getCompleteTasks');
+// const getInCompletedTasks = require('./controllers/getInCompleteTasks');
+const getTasks = require('./controllers/getTasks');
 
-router.get('/tasksCompleted/:param1/:param2', verifyParams, getCompletedTasks);
-
-router.get('/tasksInCompleted/:param1/:param2',verifyParams, );
+router.get('/tasks/:Completed',verifyParams, getTasks);
 
 module.exports = router;

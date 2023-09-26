@@ -9,7 +9,7 @@ const handleInvalidRequest = (req,res,next) => {
         const {id, isCompleted, description } = req.body;
         if (!id || typeof isCompleted !== 'boolean' || !description)
         {
-            return res.stastus(400).json({ error: 'Informacion no valida o atributos faltantes'});
+            return res.status(400).json({ error: 'Informacion no valida o atributos faltantes'});
         }
     }
     next();
