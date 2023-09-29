@@ -1,3 +1,5 @@
+//Verificar parametros de solicitudes
+
 const verifyParams = (req, res, next) => {
     const {Completed} =req.params;
 

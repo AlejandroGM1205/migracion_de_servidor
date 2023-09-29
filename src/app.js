@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 
 const app = express();
 dotenv.config();
-
+// Rutas de ver tareas y editar tareas
 const viewRouter = require("../list-view-router.js");
 const editRouter = require("../list-edit-router.js");
 app.use(express.json());
@@ -14,12 +14,12 @@ app.use(express.json());
 app.get("/tasks", (req, res) => {
   res.json(tasks);
 });
-
+//Usuarios para prueba de token
 const users = [
   { id: 1, username: "user1", password: "password1" },
   { id: 2, username: "user2", password: "password2" },
 ];
-
+//Solicitud post con el login y generacion de Token
 const JWT_SECRET = process.env.SECRET_KEY;
 
 app.post("/login", (req, res) => {
@@ -32,11 +32,11 @@ app.post("/login", (req, res) => {
     return res.status(401).json({ error: "Invalid credentials" });
   }
 
-  const token = jwt.sign({ id: user.id, username: user.username }, JWT_SECRET);
+  const token = jwt.sign({ id: user.id, username: user.username }, JWT_SECRET, {expiresIn: "1h"});
 
   res.json({ token });
 });
-
+//Ruta protegida para ver datos con el Token
 app.get("/protected", (req, res) => {
   const token = req.header("Authorization");
 
@@ -52,7 +52,7 @@ app.get("/protected", (req, res) => {
     res.json({ message: "Token validated", decoded });
   });
 });
-
+//Uso de rutas en la app
 app.use("/editTasks", editRouter);
 app.use("/viewTasks", viewRouter);
 
